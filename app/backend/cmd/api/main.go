@@ -26,7 +26,7 @@ func main() {
 	trainers := repo.NewTrainerRepo(database)
 	gyms := repo.NewGymRepo(database)
 
-	authH := &handler.AuthHandler{UC: &usecase.AuthUC{Users: users, Secret: []byte(cfg.JWT_SECRET)}}
+	authH := &handler.AuthHandler{UC: &usecase.AuthUC{Users: users, Secret: []byte(cfg.JWTSecret)}}
 	trainerH := &handler.TrainerHandler{UC: &usecase.TrainerUC{Repo: trainers}}
 	gymH := &handler.GymHandler{UC: &usecase.GymUC{Repo: gyms}}
 
@@ -38,4 +38,5 @@ func main() {
 	api.Get("/gyms/near", gymH.Near)
 
 	log.Fatal(app.Listen(":" + cfg.Port))
+
 }

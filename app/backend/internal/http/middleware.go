@@ -1,10 +1,13 @@
 package http
 
 import (
-	"github.com/gofiber/contrib/fiberjwt/v2"
+	jwtware "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2"
 )
 
 func JWTMiddleware(secret string) fiber.Handler {
-	return fiberjwt.New(fiberjwt.Config{SigningKey: []byte(secret), ContextKey: "user"})
+	return jwtware.New(jwtware.Config{
+		SigningKey: jwtware.SigningKey{Key: []byte(secret)},
+		ContextKey: "user",
+	})
 }

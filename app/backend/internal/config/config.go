@@ -13,8 +13,8 @@ type Config struct {
 
 func Load() Config {
 	return Config{
-		MongoURI:     os.Getenv("MONGO_URI"),
-		JWTSecret:    os.Getenv("JWT_SECRET"),
+		MongoURI:     getOr("MONGO_URI", "mongodb://localhost:27017/fitconnect"),
+		JWTSecret:    getOr("JWT_SECRET", "dev-secret"),
 		Port:         getOr("PORT", "8080"),
 		ClientOrigin: getOr("CLIENT_ORIGIN", "http://localhost:5173"),
 	}
